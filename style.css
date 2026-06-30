@@ -24,3 +24,47 @@ body {
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#wordInput {
+    flex: 1;
+    padding: 12px;
+    border: 3px solid #764ba2;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#wordInput:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+#searchBtn {
+    padding: 12px 25px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3;
+}
+
+#searchBtn:hover {
+    background: white;
+    border: 3px solid #667eea;
+    color: #667eea;
+}
