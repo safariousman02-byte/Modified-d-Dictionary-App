@@ -29,15 +29,15 @@ function searchWord(word) {
 
     if (!searchTerm) {
 
-        statusBar.textContent = 'Please type a word!..';
+        statusBar.textContent = 'Please type a word!';
         statusBar.className = 'status-error';
         return;
     }
 
     statusBar.textContent = 'Searching for " ' + searchTerm + '"...';
-    statusBar.className = 'Status-Loading';
+    statusBar.className = 'status-loading';
 
-    document.getElementById('result').innerHTML = '<p id="status">Searcching...</p>';
+    document.getElementById('result').innerHTML = '<p id="status">Searching...</p>';
 
     fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + searchTerm)
         .then(function(res) {
@@ -49,7 +49,33 @@ function searchWord(word) {
         })
         .then(function(data) {
 
-            console.log("Api Response: ", data);
+            const wordData = data[0];
+            const meaning = wordData.meanings[0];
+            const definition = meaning.definitions[0];
+
+            let html = '<div class="word-card">';
+
+                html += '<h2>' + wordData.word + '</h2>';
+
+                if (wordData.phonetic) {
+                    html += '<div class="phonetic">' + wordData.phonetic + '</div>';
+                }
+
+                html += '<span class="part-of-spech">' + meaning.partOfSpeech + '</span>';
+
+                html += '<span class="meaning">' + definition.definition + '</span>';
+
+                if (definition.example) {
+                    html += '<div class="example">' + definition.example + '</div>';
+                }
+
+            html += '</div>';
+
+            document.getElementById('result').innerHTML = html;
+            statusBar.textContent = 'Found definition for " ' + searchTerm + ' "';
+            statusBar.className = '';
+
+            console.log('Api Response: ' + data);
             statusBar.textContent = 'Found definition for " ' + searchTerm + ' "';
             statusBar.className = '';
 
@@ -62,7 +88,7 @@ function searchWord(word) {
 }
 
 searchBtn.onclick = function() {
-    searchWord(player);
+    searchWord();
 };
 
 wordInput.addEventListener('keypress', function(event) {

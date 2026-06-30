@@ -7,3 +7,6 @@
 ## COMPLETING THE SECOND STAGE
 
  ![ALT](/src/p2.png)
+
+## COMPLETING THE THIRD STAGE
+ ![ALT](/src/p3.png)
