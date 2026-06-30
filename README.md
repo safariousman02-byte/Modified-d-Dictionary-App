@@ -1,1 +1,5 @@
 # MODIFIED DICTIONARY APP
+
+## FIRST STAGE
+
+ ![ALT](/src/p1.png)
