@@ -22,3 +22,53 @@ wordInput.addEventListener('keypress', function(event) {
         searchBtn.click();
     }
 });
+
+function searchWord(word) {
+
+    const searchTerm = word || wordInput.value.trim();
+
+    if (!searchTerm) {
+
+        statusBar.textContent = 'Please type a word!..';
+        statusBar.className = 'status-error';
+        return;
+    }
+
+    statusBar.textContent = 'Searching for " ' + searchTerm + '"...';
+    statusBar.className = 'Status-Loading';
+
+    document.getElementById('result').innerHTML = '<p id="status">Searcching...</p>';
+
+    fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + searchTerm)
+        .then(function(res) {
+
+            if (!res.ok) {
+                throw new Error('Word not found');
+            }
+            return res.json();
+        })
+        .then(function(data) {
+
+            console.log("Api Response: ", data);
+            statusBar.textContent = 'Found definition for " ' + searchTerm + ' "';
+            statusBar.className = '';
+
+            alert('Word found! check console for data.');
+        })
+        .catch(function() {
+            statusBar.textContent = 'No definition found for " ' + searchTerm + '"';
+            statusBar.className = 'Status-error';
+        });
+}
+
+searchBtn.onclick = function() {
+    searchWord(player);
+};
+
+wordInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        searchWord();
+    }
+});
+
+console.log("Yo sup?..");l

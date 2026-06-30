@@ -68,3 +68,22 @@ h1 {
     border: 3px solid #667eea;
     color: #667eea;
 }
+
+#result {
+    min-height: 100px;
+    margin-bottom: 20px;
+}
+
+#status {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+}
+
+.status-loading {
+    color: #667eea !important;
+}
+
+.status-error {
+    color: #e53e3e !important;
+}
