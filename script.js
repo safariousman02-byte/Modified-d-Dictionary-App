@@ -85,7 +85,49 @@ function searchWord(word) {
             statusBar.textContent = 'No definition found for " ' + searchTerm + '"';
             statusBar.className = 'Status-error';
         });
+
 }
+
+let history = JSON.parse(localStorage.getItem('dictHistory')) || [];
+
+function displayHistory() {
+
+    const historyList = document.getElementById('historyList');
+    historyList.innerHTML = '';
+
+    history.forEach(function(word) {
+        const li = document.createElement('li');
+        li.textContent = word;
+
+        li.onclick = function() {
+            wordInput.value = word;
+            searchWord(word)
+        };
+
+        historyList.appendChild(li);
+    });
+
+}
+
+function addToHistory(word) {
+
+    history = history.filter(function(w) {
+        return w !== word;
+    });
+
+    history.unshift(word);
+
+    if (history.length > 5) {
+        history.pop();
+    }
+
+    localStorage.setItem('dictHistory', JSON.stringify(history));
+
+    displayHistory();
+
+}
+
+
 
 searchBtn.onclick = function() {
     searchWord();
@@ -97,4 +139,8 @@ wordInput.addEventListener('keypress', function(event) {
     }
 });
 
-console.log("Yo sup?..");l
+console.log("Yo sup?..");
+
+ldisplayHistory();
+
+addToHistory(searchTerm);
